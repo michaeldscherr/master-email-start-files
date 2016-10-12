@@ -1,0 +1,38 @@
+extends base.pug
+
+block preheader
+    td
+        +tbl("center", "100%")
+            tr
+                td(
+                    valign="middle"
+                    style={
+                        'font': '14px/18px sans-serif'
+                    }
+                )
+                    | Cursus Lorem Dapibus Tristique Sollicitudin
+                td(align="right")
+                    a(href="https://google.com")&attributes(hrefDefaults)
+                        +img("https://placehold.it/50x50", 50, 50)
+block hero_image
+    td(style={
+        'padding-top': '15px'
+    })
+        a(href="https://google.com")&attributes(hrefDefaults)
+            +img("https://placehold.it/600x350", 600, 350, "hero image")
+
+block main_content
+    td(style={
+        'padding-top': '15px',
+    })
+        +mso_start(600)
+        +mso_col(200)
+            td
+                | hello 1
+        +mso_col(200)
+            td
+                | hello 2
+        +mso_col(200, "right")
+            td
+                | hello 3
+        +mso_end

@@ -1,0 +1,21 @@
+@media only screen and (max-width: 600px) {
+    .fw {
+        height: auto !important;
+        width: 100% !important;
+    }
+    .mtb {
+        display: block !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+    .ir {
+        height: auto !important;
+        max-width: 100% !important;
+    }
+    .mp {
+        padding: 15px !important;
+    }
+    .exp {
+        width: 1px !important;
+    }
+}

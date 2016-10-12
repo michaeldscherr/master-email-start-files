@@ -1,0 +1,65 @@
+mixin tbl(align, width, classes)
+    - classes = classes ? classes : 'fw'
+    table(
+        align=align
+        width=width
+        class=classes
+    )&attributes(tableDefaults)
+        block
+
+mixin row(classes, tdBGColor)
+    - classes = classes ? classes : ''
+    - tdBGColor = tdBGColor ? tdBGColor : baseBGColor
+    +tbl("center", "100%")
+        tr
+            td(bgcolor=tdBGColor class=classes)
+                block
+
+mixin img(src, width, height, alt, display)
+    - display = display ? display : 'block';
+    - alt = alt ? alt : 'image'
+    img.ir(
+        src=src
+        width=width
+        height=height
+        alt=alt
+        style={
+            display: display,
+            outline: imgDefaults.outline,
+            border: imgDefaults.border
+        }
+    )
+
+mixin expander
+    td.exp(style={
+        padding: 0,
+        visibility: 'hidden',
+        width: 0,
+    })
+
+mixin mso_start(width)
+    | <!--[if (gte mso 9)|(IE)]><table cellpadding="0" cellspacing="0" border="0" width="!{width}"><tr><![endif]-->
+
+mixin mso_end
+    | <!--[if (gte mso 9)|(IE)]></tr></table><![endif]-->
+
+mixin mso_col(width, align)
+    - align = align ? align : 'left'
+    | <!--[if (gte mso 9)|(IE)]><td width="!{width}"><![endif]-->
+    table(
+        align=align
+        width=width
+        class="mtb"
+    )&attributes(tableDefaults)
+        tr
+            block
+            +expander
+    | <!--[if (gte mso 9)|(IE)]></td><![endif]-->
+
+mixin gmail_hack
+    div(style={
+        display: 'none',
+        font: '15px courier',
+        'white-space': 'nowrap',
+    })
+        | &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;
