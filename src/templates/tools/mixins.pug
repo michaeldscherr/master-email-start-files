@@ -1,65 +1,78 @@
-mixin tbl(align, width, classes)
-    - classes = classes ? classes : 'fw'
-    table(
-        align=align
-        width=width
-        class=classes
-    )&attributes(tableDefaults)
+mixin table()
+    - customAttrs = { class: "fw" }
+    - attrs = Object.assign({}, tableDefaults, customAttrs, attributes)
+    table()&attributes(attrs)
         block
 
-mixin row(classes, tdBGColor)
-    - classes = classes ? classes : ''
-    - tdBGColor = tdBGColor ? tdBGColor : baseBGColor
-    +tbl("center", "100%")
-        tr
-            td(bgcolor=tdBGColor class=classes)
-                block
-
-mixin img(src, width, height, alt, display)
-    - display = display ? display : 'block';
-    - alt = alt ? alt : 'image'
-    img.ir(
-        src=src
-        width=width
-        height=height
-        alt=alt
-        style={
-            display: display,
-            outline: imgDefaults.outline,
-            border: imgDefaults.border
-        }
-    )
+mixin td()
+    - attrs = Object.assign({}, tdDefaults, attributes)
+    td()&attributes(attrs)
+        block
 
 mixin expander
-    td.exp(style={
-        padding: 0,
-        visibility: 'hidden',
-        width: 0,
-    })
+    - customAttrs = { class: "exp" }
+    - attrs = Object.assign({}, expanderDefaults, customAttrs, attributes)
+    td()&attributes(attrs)
 
-mixin mso_start(width)
-    | <!--[if (gte mso 9)|(IE)]><table cellpadding="0" cellspacing="0" border="0" width="!{width}"><tr><![endif]-->
-
-mixin mso_end
+mixin cols
+    | <!--[if (gte mso 9)|(IE)]><table cellpadding="0" cellspacing="0" border="0" width="!{Math.floor(attributes.width)}"><tr><![endif]-->
+    block
     | <!--[if (gte mso 9)|(IE)]></tr></table><![endif]-->
 
-mixin mso_col(width, align)
-    - align = align ? align : 'left'
-    | <!--[if (gte mso 9)|(IE)]><td width="!{width}"><![endif]-->
-    table(
-        align=align
-        width=width
-        class="mtb"
-    )&attributes(tableDefaults)
-        tr
-            block
-            +expander
+mixin col
+    - attributes.width = Math.floor(attributes.width)
+    - attributes.align = attributes.align ? attributes.align : "left"
+    | <!--[if (gte mso 9)|(IE)]><td align="!{attributes.align}" width="!{Math.floor(attributes.width)}"><![endif]-->
+    +table.tbl-col()&attributes(attributes): tr
+        block
+        +expander
     | <!--[if (gte mso 9)|(IE)]></td><![endif]-->
 
+mixin a
+    - attrs = Object.assign({}, hrefDefaults, attributes)
+    a()&attributes(attrs)
+        block
+
+mixin br(count)
+    - count = (typeof count !== 'undefined') ? count : 1
+    - for(var i = 1; i <= count; i++)
+        br()&attributes(attributes)
+
+mixin img
+    - customAttrs = { class: "ir" }
+    - attrs = Object.assign({}, imgDefaults, customAttrs, attributes)
+    img()&attributes(attrs)
+
+mixin btn(text)
+    -
+        customStyle = {}
+        attributes.style.split(";")
+            .map(style => style.split(":"))
+            .map(style => customStyle[style[0]] = style[1]);
+        attributes.style = Object.assign({}, btnDefaults.style, customStyle)
+        attrs = Object.assign({}, btnDefaults, attributes)
+        vrectAttrs = {
+            style: {
+                "v-text-anchor": "middle",
+                height: attributes.style['line-height'],
+                width: attributes.style.width,
+            },
+        }
+    | <div> <!--[if mso]>
+    v:rect(
+        xmlns:v="urn:schemas-microsoft-com:vml"
+        xmlns:w="urn:schemas-microsoft-com:office:word"
+        stroke="f"
+        fillcolor=attributes.style['background-color']
+        href=attributes.href
+        style=vrectAttrs.style
+    )
+        | <w:anchorlock/>
+        | <center>
+    | <![endif]-->
+    a()&attributes(attrs)= text
+    | <!--[if mso]></center></v:rect><![endif]--></div>
+
 mixin gmail_hack
-    div(style={
-        display: 'none',
-        font: '15px courier',
-        'white-space': 'nowrap',
-    })
+    div(style="display: none; font: 15px courier; white-space: nowrap")
         | &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;

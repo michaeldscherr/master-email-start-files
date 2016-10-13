@@ -1,38 +1,59 @@
 extends base.pug
 
 block preheader
-    td
-        +tbl("center", "100%")
+    +td(style="padding: 15px 0;")
+        +table
             tr
-                td(
-                    valign="middle"
-                    style={
-                        'font': '14px/18px sans-serif'
-                    }
-                )
-                    | Cursus Lorem Dapibus Tristique Sollicitudin
-                td(align="right")
-                    a(href="https://google.com")&attributes(hrefDefaults)
-                        +img("https://placehold.it/50x50", 50, 50)
-block hero_image
-    td(style={
-        'padding-top': '15px'
-    })
-        a(href="https://google.com")&attributes(hrefDefaults)
-            +img("https://placehold.it/600x350", 600, 350, "hero image")
+                +td(width="70%")
+                    | Cras mattis #[strong consectetur purus] sit amet fermentum.
+                +td(width="30%" align="right")
+                    +a(
+                        href="https://www.google.com"
+                    )
+                        +img(
+                            width="50"
+                            height="50"
+                            src="https://placehold.it/50x50"
+                        )
 
-block main_content
-    td(style={
-        'padding-top': '15px',
-    })
-        +mso_start(600)
-        +mso_col(200)
-            td
-                | hello 1
-        +mso_col(200)
-            td
-                | hello 2
-        +mso_col(200, "right")
-            td
-                | hello 3
-        +mso_end
+block hero_image
+    +td
+        +img(
+            width="600"
+            height="350"
+            src="https://placehold.it/600x350"
+        )
+
+block content_one
+    +td(style="padding-top: 15px;")
+        +table: tr
+            +td.m-pad(style="padding: 25px;")
+                | Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+                +br(2)
+                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.
+
+block content_two
+    +td(style="padding-top: 15px;")
+        +cols(width="600")
+            +col(
+                width=((600 / 2) - (15 / 2))
+                align="left"
+            )
+                +td
+                    +img(
+                        width=(600 / 2)
+                        height="150"
+                        src="https://placehold.it/200x150"
+                    )
+                    +br()(style="line-height: 15px")
+            +col(
+                width=((600 / 2) - (15 / 2))
+                align="right"
+            )
+                +td
+                    +img(
+                        width=(600 / 2)
+                        height="150"
+                        src="https://placehold.it/200x150"
+                    )
+                    +br()(style="line-height: 15px")

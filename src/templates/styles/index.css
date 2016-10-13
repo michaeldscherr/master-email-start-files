@@ -1,21 +1,43 @@
+body {
+    font: 16px/20px sans-serif;
+}
+
+.ir {
+    max-width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+        line-height: 18px;
+    }
     .fw {
         height: auto !important;
+        max-width: 100% !important;
         width: 100% !important;
     }
-    .mtb {
+    .tbl-col {
         display: block !important;
+        max-width: 100% !important;
         padding: 0 !important;
         width: 100% !important;
+    }
+    .tbl-col + .tbl-col {
+        padding-top: 15px !important;
+    }
+    .m-pad {
+        padding: 15px !important;
+    }
+    .exp {
+        width: 1px !important;
     }
     .ir {
         height: auto !important;
         max-width: 100% !important;
     }
-    .mp {
-        padding: 15px !important;
-    }
-    .exp {
-        width: 1px !important;
+    .ira {
+        height: auto !important;
+        margin: 0 auto !important;
+        max-width: 100% !important;
     }
 }

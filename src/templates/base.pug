@@ -19,16 +19,15 @@ html
         offset="0"
     )
         center
-            table#backgroundTable&attributes(tableDefaults)
-                tr
-                    td(style={
-                        padding: '15px',
-                    })
-                        +tbl("center", 600)
-                            tr
-                                block preheader
-                            tr
-                                block hero_image
-                            tr
-                                block main_content
-        +gmail_hack
+            +table(id="bgTable&attributes"): tr: td(style="padding: 15px;")
+                +table(width=emailWidth): tr: td
+                    +table
+                        tr
+                            block preheader
+                        tr
+                            block hero_image
+                        tr
+                            block content_one
+                        tr
+                            block content_two
+            +gmail_hack
